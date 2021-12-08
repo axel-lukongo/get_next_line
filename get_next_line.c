@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:24:39 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/07 15:55:32 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:31:06 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,24 @@ so the buff containe the previous elements so i copy this in str to.*/
 
 char	*writting(int fd, int count)
 {
-	int			ret;
-	char		*str;
-	int			size;
-	static char	buf[BUFFER_SIZE];
+	int				ret;
+	char			*str;
+	int				size;
+	static char		*rest;
+	char			buf[BUFFER_SIZE];
 
 	size = 0;
 	ret = read(fd, buf, BUFFER_SIZE);
 	size = ft_strlen(buf);
 	count += size;
 	if (is_newline(buf) == NO_NEW_LINE && ret != 0)
-	{
 		str = writting(fd, count);
-	}
 	else
 	{
+		count += ft_strlen(rest);
 		str = malloc(sizeof(char) * count + 1);
 		str[count] = '\0';
+		rest = cpy_rest(rest, str, buf);
 	}
 	while (size && count)
 		str[--count] = buf[--size];
