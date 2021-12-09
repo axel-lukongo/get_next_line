@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:24:39 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/08 19:31:06 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:21:38 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,16 @@ int	is_newline(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (str)
 	{
-		if (str[i] == '\n')
+		while (str[i])
 		{
-			return (NEW_LINE);
+			if (str[i] == '\n')
+			{
+				return (NEW_LINE);
+			}
+			i++;
 		}
-		i++;
 	}
 	return (NO_NEW_LINE);
 }
@@ -47,14 +50,17 @@ char	*writting(int fd, int count)
 	char			buf[BUFFER_SIZE];
 
 	size = 0;
-	ret = read(fd, buf, BUFFER_SIZE);
-	size = ft_strlen(buf);
+	if (is_newline(rest) != NEW_LINE)
+		ret = read(fd, buf, BUFFER_SIZE);
+	buf[BUFFER_SIZE] = '\0';
+	size = ft_strlen_nl(buf);
 	count += size;
-	if (is_newline(buf) == NO_NEW_LINE && ret != 0)
+	if (is_newline(buf) == NO_NEW_LINE && ret != 0
+		&& (ft_strlen_nl(buf) == BUFFER_SIZE))
 		str = writting(fd, count);
 	else
 	{
-		count += ft_strlen(rest);
+		count += ft_strlen_nl(rest);
 		str = malloc(sizeof(char) * count + 1);
 		str[count] = '\0';
 		rest = cpy_rest(rest, str, buf);

@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:22:46 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/08 19:31:43 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:13:21 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*this is a strlen white a litle modification, he count the number of char
 until the \n */
-size_t	ft_strlen(char *s)
+size_t	ft_strlen_nl(char *s)
 {
 	int	i;
 
@@ -29,12 +29,28 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strdup(char *s, char *src)
+size_t	ft_strlen(char *s)
 {
 	int	i;
 
 	i = 0;
-	s = malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (s)
+	{
+		while (s[i])
+		{
+			s[i++];
+		}
+	}
+	return (i);
+}
+
+char	*ft_strdup(char *s, char *src)
+{
+	int		i;
+	char	tes;
+
+	i = 0;
+	s = malloc(sizeof(char) * ft_strlen_nl(src) + 1);
 	if (!(s))
 		return (0);
 	while (src[i])
@@ -46,39 +62,28 @@ char	*ft_strdup(char *s, char *src)
 	return (s);
 }
 
-/*char	*ft_strcpy(char *dest, char *src)
+char	*cpy_rest(char *rest, char *str, char *buff)
 {
 	int	i;
 
 	i = 0;
-	while (src[i])
+	if (rest)
 	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}*/
-
-char	*cpy_rest(char *ptr, char *str, char *buff)
-{
-	int	i;
-
-	i = 0;
-	if (ptr)
-	{
-		while (ptr[i])
+		while (*rest && *rest != '\n')
 		{
-			str[i] = ptr[i];
+			if (*rest != '\n')
+				str[i] = *rest;
 			i++;
+			rest++;
 		}
+		while (*rest == '\n')
+			rest++;
 	}
-	if (is_newline(buff) == NEW_LINE)
-		while (*buff == '\n')
-			buff++;
-	else
-		while (*buff != '\n' || *buff == '\0')
-			buff++;
-	ptr = ft_strdup(ptr, buff);
-	return (ptr);
+	while (*buff != '\n' && *buff != '\0')
+		buff++;
+	while (*buff == '\n')
+		buff++;
+	if (ft_strlen(rest) == 0)
+		rest = ft_strdup(rest, buff);
+	return (rest);
 }
