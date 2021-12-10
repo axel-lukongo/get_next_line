@@ -6,11 +6,23 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:24:39 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/10 18:07:35 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:09:57 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"get_next_line.h"
+
+char	*ft_alloc(char *str, int count)
+{
+	str = malloc(sizeof(char) * count + 1);
+	if (!str)
+	{
+		free(str);
+		return (0);
+	}
+	str[count] = '\0';
+	return (str);
+}
 
 /*in this fonctions i look for a new line(\n) among the str*/
 int	is_newline(char *str)
@@ -61,8 +73,7 @@ char	*writting(int fd, int count, char *str)
 		str = writting(fd, count, str);
 	else
 	{
-		str = malloc(sizeof(char) * count + 1);
-		str[count] = '\0';
+		str = ft_alloc(str, count);
 		rest = cpy_rest(rest, str, buf);
 	}
 	while (size && count)

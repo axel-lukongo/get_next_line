@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:22:46 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/10 18:01:42 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:18:15 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ char	*cpy_rest(char *rest, char *str, char *buff)
 		{
 			if (*rest != '\n')
 				str[i] = *rest;
+			/*rest = 0; i think the problem it because when i move *rest,
+			 i did not delete the previous case of *rest and after,
+			 this loops i put a new element in rest*/
 			i++;
 			rest++;
 		}
