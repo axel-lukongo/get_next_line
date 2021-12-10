@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:22:46 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/10 16:37:15 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:01:42 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ char	*ft_strdup(char *s, char *src)
 	i = 0;
 	if (src)
 	{
-		s = malloc(sizeof(char) * ft_strlen_nl(src) + 1);
+		s = malloc(sizeof(char) * ft_strlen(src) + 1);
 		if (!(s))
+		{
+			free(s);
 			return (0);
+		}
 		while (src[i])
 		{
 			s[i] = src[i];

@@ -6,13 +6,13 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:26:36 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/10 16:27:46 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:03:19 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFFER_SIZE 10
+# define BUFFER_SIZE 20
 # define NO_NEW_LINE -1
 # define NEW_LINE 1
 # include<unistd.h>
@@ -27,5 +27,4 @@ int		ft_strlen_nl(char *s);
 char	*cpy_rest(char *ptr, char *str, char *buff);
 int		ft_strlen(char *s);
 int		is_newline(char *str);
-void	*ft_memset( void *pointer, int value, size_t count );
 #endif // !GET_NEXT_LINE_H
