@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:22:46 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/09 17:13:21 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/10 16:37:15 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*this is a strlen white a litle modification, he count the number of char
 until the \n */
-size_t	ft_strlen_nl(char *s)
+int	ft_strlen_nl(char *s)
 {
 	int	i;
 
@@ -23,13 +23,15 @@ size_t	ft_strlen_nl(char *s)
 	{
 		while (s[i] && s[i] != '\n')
 		{
-			s[i++];
+			i++;
 		}
+		if (s[i] == '\n')
+			i++;
 	}
 	return (i);
 }
 
-size_t	ft_strlen(char *s)
+int	ft_strlen(char *s)
 {
 	int	i;
 
@@ -37,9 +39,7 @@ size_t	ft_strlen(char *s)
 	if (s)
 	{
 		while (s[i])
-		{
-			s[i++];
-		}
+			i++;
 	}
 	return (i);
 }
@@ -47,24 +47,26 @@ size_t	ft_strlen(char *s)
 char	*ft_strdup(char *s, char *src)
 {
 	int		i;
-	char	tes;
 
 	i = 0;
-	s = malloc(sizeof(char) * ft_strlen_nl(src) + 1);
-	if (!(s))
-		return (0);
-	while (src[i])
+	if (src)
 	{
-		s[i] = src[i];
-		i++;
+		s = malloc(sizeof(char) * ft_strlen_nl(src) + 1);
+		if (!(s))
+			return (0);
+		while (src[i])
+		{
+			s[i] = src[i];
+			i++;
+		}
+		s[i] = '\0';
 	}
-	s[i] = '\0';
 	return (s);
 }
 
 char	*cpy_rest(char *rest, char *str, char *buff)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	if (rest)
@@ -76,6 +78,7 @@ char	*cpy_rest(char *rest, char *str, char *buff)
 			i++;
 			rest++;
 		}
+		str[i] = *rest;
 		while (*rest == '\n')
 			rest++;
 	}

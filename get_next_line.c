@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:24:39 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/09 17:21:38 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/10 16:31:43 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,26 @@ i read before the new line), and i start to copy the actual buf in str.
 when he copied all caractere of the actual buff he trace back in recursive,
 so the buff containe the previous elements so i copy this in str to.*/
 
-char	*writting(int fd, int count)
+char	*writting(int fd, int count, char *str)
 {
 	int				ret;
-	char			*str;
 	int				size;
 	static char		*rest;
-	char			buf[BUFFER_SIZE];
+	char			buf[BUFFER_SIZE + 1];
 
 	size = 0;
+	ret = 0;
 	if (is_newline(rest) != NEW_LINE)
 		ret = read(fd, buf, BUFFER_SIZE);
-	buf[BUFFER_SIZE] = '\0';
+	buf[ret] = '\0';
 	size = ft_strlen_nl(buf);
+	if (count < ft_strlen_nl(rest))
+		count += ft_strlen_nl(rest);
 	count += size;
-	if (is_newline(buf) == NO_NEW_LINE && ret != 0
-		&& (ft_strlen_nl(buf) == BUFFER_SIZE))
-		str = writting(fd, count);
+	if (is_newline(buf) == NO_NEW_LINE && ret != 0)
+		str = writting(fd, count, str);
 	else
 	{
-		count += ft_strlen_nl(rest);
 		str = malloc(sizeof(char) * count + 1);
 		str[count] = '\0';
 		rest = cpy_rest(rest, str, buf);
@@ -74,10 +74,11 @@ char	*writting(int fd, int count)
 the big part of the job is in the fonction writter*/
 char	*get_next_line(int fd)
 {
-	char	*str;
-	int		count;
+	char			*str;
+	int				count;
 
 	count = 0;
-	str = writting(fd, count);
+	str = NULL;
+	str = writting(fd, count, str);
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:26:36 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/09 12:32:03 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/10 16:27:46 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # include<stdio.h>
 
 char	*get_next_line(int fd);
-size_t	ft_strlen_nl(char *s);
+int		ft_strlen_nl(char *s);
 char	*cpy_rest(char *ptr, char *str, char *buff);
+int		ft_strlen(char *s);
 int		is_newline(char *str);
+void	*ft_memset( void *pointer, int value, size_t count );
 #endif // !GET_NEXT_LINE_H
