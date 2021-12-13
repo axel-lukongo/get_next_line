@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:22:46 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/10 18:18:15 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/13 19:47:22 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strdup(char *s, char *src)
+char	*ft_strdup(char *s, char *src, char *ptr)
 {
 	int		i;
 
 	i = 0;
-	if (src)
+	if (src && src[0])
 	{
 		s = malloc(sizeof(char) * ft_strlen(src) + 1);
 		if (!(s))
@@ -63,24 +63,44 @@ char	*ft_strdup(char *s, char *src)
 			i++;
 		}
 		s[i] = '\0';
+		if (ptr)
+			free(ptr);
 	}
+	if (*s == '\n')
+		free(s);
+	return (s);
+}
+
+char	*ft_strdup_r(char *src)
+{
+	int		i;
+	char	*s;
+
+	i = 0;
+	s = malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (!(s))
+		return (0);
+	while (src[i])
+	{
+		s[i] = src[i];
+		i++;
+	}
+	s[i] = '\0';
 	return (s);
 }
 
 char	*cpy_rest(char *rest, char *str, char *buff)
 {
 	int		i;
+	char	*ptr;
 
+	ptr = rest;
 	i = 0;
 	if (rest)
 	{
 		while (*rest && *rest != '\n')
 		{
-			if (*rest != '\n')
-				str[i] = *rest;
-			/*rest = 0; i think the problem it because when i move *rest,
-			 i did not delete the previous case of *rest and after,
-			 this loops i put a new element in rest*/
+			str[i] = *rest;
 			i++;
 			rest++;
 		}
@@ -93,6 +113,11 @@ char	*cpy_rest(char *rest, char *str, char *buff)
 	while (*buff == '\n')
 		buff++;
 	if (ft_strlen(rest) == 0)
-		rest = ft_strdup(rest, buff);
+		rest = ft_strdup(rest, buff,ptr);
+	else
+	{
+		rest = ft_strdup_r(rest);
+		free(ptr);
+	}
 	return (rest);
 }

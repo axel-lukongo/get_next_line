@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:00:02 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/10 18:00:50 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:57:59 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ int	main(void)
 	str = get_next_line(fd);
 	printf("%s", str);
 	free(str);
+	/*while (str)
+	{
+		str = get_next_line(fd);
+	}*/
 	str = get_next_line(fd);
 	printf("%s", str);
 	free(str);
@@ -34,6 +38,6 @@ int	main(void)
 	printf("%s", str);
 	free(str);
 	str = get_next_line(fd);
-	printf("(%s)\n", str);
+	printf("%s\n", str);
 	free(str);
 }
