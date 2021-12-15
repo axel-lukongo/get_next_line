@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:24:39 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/13 18:42:24 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/14 18:50:33 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ char	*writting(int fd, int count, char *str)
 	{
 		str = ft_alloc(str, count);
 		rest = cpy_rest(rest, str, buf);
+		/*if (ret < BUFFER_SIZE)
+			free(rest);*/
 	}
 	while (size && count)
 		str[--count] = buf[--size];
