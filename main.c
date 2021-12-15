@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:00:02 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/15 14:34:31 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/15 16:19:41 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ int	main(void)
 
 	fd = open("file1", O_RDONLY);
 	str = get_next_line(fd);
-	printf("%s", str);
-	free(str);
-	str = get_next_line(fd);
+	while (str)
+	{
+		printf("%s", str);
+		free(str);
+		str = get_next_line(fd);
+	}
+	/*str = get_next_line(fd);
 	printf("%s", str);
 	free(str);
 	str = get_next_line(fd);
@@ -35,5 +39,5 @@ int	main(void)
 	free(str);
 	str = get_next_line(fd);
 	printf("%s\n", str);
-	free(str);
+	free(str);*/
 }

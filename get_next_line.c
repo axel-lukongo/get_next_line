@@ -6,11 +6,24 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:24:39 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/14 18:50:33 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:08:22 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"get_next_line.h"
+
+int	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (s)
+	{
+		while (s[i])
+			i++;
+	}
+	return (i);
+}
 
 char	*ft_alloc(char *str, int count)
 {
@@ -75,8 +88,6 @@ char	*writting(int fd, int count, char *str)
 	{
 		str = ft_alloc(str, count);
 		rest = cpy_rest(rest, str, buf);
-		/*if (ret < BUFFER_SIZE)
-			free(rest);*/
 	}
 	while (size && count)
 		str[--count] = buf[--size];
@@ -95,6 +106,7 @@ char	*get_next_line(int fd)
 	str = writting(fd, count, str);
 	if (*str == '\0')
 	{
+		free(str);
 		return (NULL);
 	}
 	return (str);
