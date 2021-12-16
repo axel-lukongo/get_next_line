@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:24:39 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/16 16:59:25 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:33:11 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_strlen(char *s)
 
 char	*ft_alloc(char *str, int count)
 {
-	str = malloc(sizeof(char) * count + 2);
+	str = malloc(sizeof(char) * count + 1);
 	if (!str)
 	{
 		free(str);
@@ -38,7 +38,7 @@ char	*ft_alloc(char *str, int count)
 }
 
 /*in this fonctions i look for a new line(\n) among the str*/
-int	is_newline(char *str)
+/*int	is_newline(char *str)
 {
 	int	i;
 
@@ -55,7 +55,7 @@ int	is_newline(char *str)
 		}
 	}
 	return (NO_NEW_LINE);
-}
+}*/
 /*this fonction do the most important work for the project.
 first of all i use the variable size for get the number of the character
 who i read before the \n and i add his value in count.
@@ -75,14 +75,14 @@ char	*writting(int fd, int count, char *str)
 
 	size = 0;
 	ret = 0;
-	if (is_newline(rest) != NEW_LINE)
+	if (ft_strlen_nl(rest) <= BUFFER_SIZE)
 		ret = read(fd, buf, BUFFER_SIZE);
 	buf[ret] = '\0';
 	size = ft_strlen_nl(buf);
 	if (count < ft_strlen_nl(rest))
 		count += ft_strlen_nl(rest);
 	count += size;
-	if (is_newline(buf) == NO_NEW_LINE && ret == BUFFER_SIZE)
+	if (size > BUFFER_SIZE && ret == BUFFER_SIZE)
 		str = writting(fd, count, str);
 	else
 	{

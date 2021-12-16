@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:22:46 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/16 17:16:10 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:53:02 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	ft_strlen_nl(char *s)
 	}
 	return (i);
 }
-
-/*char	*ft_strdup(char *s, char *src)
+/*
+char	*ft_strdup(char *s, char *src)
 {
 	int		i;
 
@@ -73,7 +73,7 @@ char	*ft_strdup_r(char *s, char *src, char *ptr)
 			i++;
 		}
 		s[i] = '\0';
-		if (ptr)
+		if (ft_strlen(ptr))
 			free(ptr);
 	}
 	return (s);
@@ -120,6 +120,7 @@ char	*cpy_rest(char *rest, char *str, char *buf)
 		if (!*rest)
 		{
 			free(ptr);
+			ptr = NULL;
 			rest = NULL;
 		}
 	}
