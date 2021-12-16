@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:24:39 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/15 18:08:22 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:59:25 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_strlen(char *s)
 
 char	*ft_alloc(char *str, int count)
 {
-	str = malloc(sizeof(char) * count + 1);
+	str = malloc(sizeof(char) * count + 2);
 	if (!str)
 	{
 		free(str);
