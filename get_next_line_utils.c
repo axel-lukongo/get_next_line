@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:22:46 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/15 16:06:27 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:37:38 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ int	ft_strlen_nl(char *s)
 	return (i);
 }
 
-
-
-char	*ft_strdup(char *s, char *src)//, char *ptr)
+char	*ft_strdup(char *s, char *src)
 {
 	int		i;
 
@@ -63,7 +61,7 @@ char	*ft_strdup_r(char *s, char *src, char *ptr)
 	i = 0;
 	if (src && src[0])
 	{
-		s = malloc(sizeof(char) * ft_strlen(src) + 1);
+		s = malloc(sizeof(char) * ft_strlen(src) + 2);
 		if (!(s))
 		{
 			free(s);
@@ -85,7 +83,7 @@ char	*new_rest(char *rest, char *buf, char *ptr)
 {
 	while (*buf != '\n' && *buf != '\0')
 		buf++;
-	while (*buf == '\n')
+	if (*buf == '\n')
 		buf++;
 	if (ft_strlen(rest) == 0)
 		rest = ft_strdup(rest, buf);
@@ -103,15 +101,22 @@ char	*cpy_rest(char *rest, char *str, char *buf)
 	i = 0;
 	if (rest)
 	{
-		while (*rest && *rest != '\n')
+		if (*rest == '\n')
 		{
 			str[i] = *rest;
-			i++;
 			rest++;
 		}
-		str[i] = *rest;
-		while (*rest == '\n')
+		else
+		{
+			while (*rest && *rest != '\n')
+			{
+				str[i] = *rest;
+				i++;
+				rest++;
+			}
+			str[i] = *rest;
 			rest++;
+		}
 		if (!*rest)
 		{
 			free(ptr);

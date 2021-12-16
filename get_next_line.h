@@ -6,13 +6,13 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:26:36 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/15 15:37:17 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:39:16 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFFER_SIZE 10
+//# define BUFFER_SIZE 42
 # define NO_NEW_LINE -1
 # define NEW_LINE 1
 # include<unistd.h>
