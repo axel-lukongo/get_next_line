@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:22:46 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/17 17:40:43 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/20 14:42:36 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	*ft_strdup(char *s, char *src)
 	return (s);
 }
 */
+
 char	*ft_strdup_r(char *s, char *src, char *ptr)
 {
 	int		i;
@@ -72,7 +73,7 @@ char	*ft_strdup_r(char *s, char *src, char *ptr)
 			s[i] = src[i];
 			i++;
 		}
-		while(i < ft_strlen(src) + 2)
+		while (i < ft_strlen(src) + 2)
 			s[i++] = '\0';
 		if (ft_strlen(ptr))
 			free(ptr);
@@ -87,12 +88,27 @@ char	*new_rest(char *rest, char *buf, char *ptr)
 	if (*buf == '\n')
 		buf++;
 	if (ft_strlen(rest) == 0)
-		{
-			rest = NULL;
-			rest = ft_strdup_r(rest, buf, ptr);
-		}
+	{
+		rest = ft_strdup_r(rest, buf, ptr);
+	}
 	else
 		rest = ft_strdup_r(rest, rest, ptr);
+	return (rest);
+}
+
+char	*cpy(char *str, char *rest)
+{
+	int	i;
+
+	i = 0;
+	while (*rest && *rest != '\n')
+	{
+		str[i] = *rest;
+		i++;
+		rest++;
+	}
+	str[i] = *rest;
+	rest++;
 	return (rest);
 }
 
@@ -112,14 +128,7 @@ char	*cpy_rest(char *rest, char *str, char *buf)
 		}
 		else
 		{
-			while (*rest && *rest != '\n')
-			{
-				str[i] = *rest;
-				i++;
-				rest++;
-			}
-			str[i] = *rest;
-			rest++;
+			rest = cpy(str, rest);
 		}
 		if (!*rest)
 		{

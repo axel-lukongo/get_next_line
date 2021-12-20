@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:24:39 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/17 17:32:08 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/20 15:41:16 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ char	*writting(int fd, int count, char *str)
 	ret = 0;
 	if (is_newline(rest) != NEW_LINE)
 		ret = read(fd, buf, BUFFER_SIZE);
+	if(ret < 0)
+		return(NULL);
 	buf[ret] = '\0';
 	size = ft_strlen_nl(buf);
 	if (count < ft_strlen_nl(rest))
@@ -84,7 +86,7 @@ char	*writting(int fd, int count, char *str)
 	count += size;
 	if (is_newline(buf) == NO_NEW_LINE && ret == BUFFER_SIZE)
 		str = writting(fd, count, str);
-	else
+	else if (ret >= 0)
 	{
 		str = ft_alloc(str, count);
 		rest = cpy_rest(rest, str, buf);
@@ -104,7 +106,7 @@ char	*get_next_line(int fd)
 	count = 0;
 	str = NULL;
 	str = writting(fd, count, str);
-	if (*str == '\0')
+	if (str && *str == '\0')
 	{
 		free(str);
 		return (NULL);
