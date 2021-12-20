@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:22:46 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/20 14:42:36 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:38:39 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,10 @@ int	ft_strlen_nl(char *s)
 	}
 	return (i);
 }
-/*
-char	*ft_strdup(char *s, char *src)
-{
-	int		i;
 
-	i = 0;
-	if (src && src[0])
-	{
-		s = malloc(sizeof(char) * ft_strlen(src) + 2);
-		if (!(s))
-		{
-			free(s);
-			return (0);
-		}
-		while (src[i])
-		{
-			s[i] = src[i];
-			i++;
-		}
-		s[i] = '\0';
-	}
-	return (s);
-}
-*/
-
+/*i allocat s(rest) for have a new address in memory
+and i copy src(buf) to s(rest) at the end ptr still
+have the old address of s so i free it*/
 char	*ft_strdup_r(char *s, char *src, char *ptr)
 {
 	int		i;
@@ -81,6 +60,8 @@ char	*ft_strdup_r(char *s, char *src, char *ptr)
 	return (s);
 }
 
+/*it for move buf until his \n and when is done
+i copy buf to rest white ft_strdup*/
 char	*new_rest(char *rest, char *buf, char *ptr)
 {
 	while (*buf != '\n' && *buf != '\0')
@@ -96,6 +77,7 @@ char	*new_rest(char *rest, char *buf, char *ptr)
 	return (rest);
 }
 
+//it for copy rest to str
 char	*cpy(char *str, char *rest)
 {
 	int	i;
@@ -112,6 +94,8 @@ char	*cpy(char *str, char *rest)
 	return (rest);
 }
 
+/*this fonction allow me to copy the character in rest until the \n
+and free the rest with ptr when i copy all*/
 char	*cpy_rest(char *rest, char *str, char *buf)
 {
 	int		i;

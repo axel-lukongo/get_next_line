@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:24:39 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/20 15:41:16 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/20 18:53:40 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
+//this is for allocat my str
 char	*ft_alloc(char *str, int count)
 {
 	str = malloc(sizeof(char) * count + 1);
@@ -56,6 +57,7 @@ int	is_newline(char *str)
 	}
 	return (NO_NEW_LINE);
 }
+
 /*this fonction do the most important work for the project.
 first of all i use the variable size for get the number of the character
 who i read before the \n and i add his value in count.
@@ -65,10 +67,8 @@ when i find the new line(\n), i malloc by count(he containe all character who
 i read before the new line), and i start to copy the actual buf in str.
 when he copied all caractere of the actual buff he trace back in recursive,
 so the buff containe the previous elements so i copy this in str to.*/
-
-char	*writting(int fd, int count, char *str)
+char	*writting(int fd, int count, char *str, int ret)
 {
-	int				ret;
 	int				size;
 	static char		*rest;
 	char			buf[BUFFER_SIZE + 1];
@@ -77,15 +77,15 @@ char	*writting(int fd, int count, char *str)
 	ret = 0;
 	if (is_newline(rest) != NEW_LINE)
 		ret = read(fd, buf, BUFFER_SIZE);
-	if(ret < 0)
-		return(NULL);
+	if (ret < 0)
+		return (NULL);
 	buf[ret] = '\0';
 	size = ft_strlen_nl(buf);
 	if (count < ft_strlen_nl(rest))
 		count += ft_strlen_nl(rest);
 	count += size;
 	if (is_newline(buf) == NO_NEW_LINE && ret == BUFFER_SIZE)
-		str = writting(fd, count, str);
+		str = writting(fd, count, str, ret);
 	else if (ret >= 0)
 	{
 		str = ft_alloc(str, count);
@@ -102,10 +102,12 @@ char	*get_next_line(int fd)
 {
 	char			*str;
 	int				count;
+	int				ret;
 
+	ret = 0;
 	count = 0;
 	str = NULL;
-	str = writting(fd, count, str);
+	str = writting(fd, count, str, ret);
 	if (str && *str == '\0')
 	{
 		free(str);
