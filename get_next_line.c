@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:24:39 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/20 18:53:40 by alukongo         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:56:56 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char	*get_next_line(int fd)
 	count = 0;
 	str = NULL;
 	str = writting(fd, count, str, ret);
-	if (str && *str == '\0')
+	if ((str && *str == '\0') || (BUFFER_SIZE > 8000000))
 	{
 		free(str);
 		return (NULL);
