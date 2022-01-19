@@ -6,7 +6,7 @@
 /*   By: alukongo <alukongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:24:39 by alukongo          #+#    #+#             */
-/*   Updated: 2021/12/20 19:56:56 by alukongo         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:39:55 by alukongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,16 @@ int	ft_strlen(char *s)
 //this is for allocat my str
 char	*ft_alloc(char *str, int count)
 {
-	str = malloc(sizeof(char) * count + 1);
-	if (!str)
+	if (count)
 	{
-		free(str);
-		return (0);
+		str = malloc(sizeof(char) * count + 1);
+		if (!str)
+		{
+			free(str);
+			return (0);
+		}
+		str[count] = '\0';
 	}
-	str[count] = '\0';
 	return (str);
 }
 
@@ -108,7 +111,7 @@ char	*get_next_line(int fd)
 	count = 0;
 	str = NULL;
 	str = writting(fd, count, str, ret);
-	if ((str && *str == '\0') || (BUFFER_SIZE > 8000000))
+	if ((!str) || (BUFFER_SIZE > 8000000))
 	{
 		free(str);
 		return (NULL);
